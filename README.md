@@ -3,8 +3,9 @@ python_ipc_queue
 
 An inter-process queue implemented using pure Python.
 
-Based on the example included in the document of multiprocessing module:
-https://docs.python.org/2/library/multiprocessing.html#using-a-remote-manager
+Based on the [example](https://docs.python.org/2/library/multiprocessing.html#using-a-remote-manager) included in the document of multiprocessing module.
+
+Works with Python 2.7 or later.
 
 Usage
 =====
