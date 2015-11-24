@@ -13,13 +13,16 @@ The module provides following functions:
         To start the queue server.
 
     get_one():
-        To get one object from the queue. This function will block if the
+        To get one request from the queue. This function will block if the
         queue is currently empty.
-        The function returns a tuple (is_valid, the_object).
+        The function returns a tuple (successful, request).
 
     cancel_wait():
         If a thread is currently blocked by get_one() function, this will
         make the function return immediately.
+
+To access the multiprocessing.Queue object directly, just use:
+    queue_server.shared_queue
 
 Configurations of the server is located in queue_global module including
 the address, port and authentication key of the server.
@@ -40,7 +43,7 @@ from multiprocessing.managers import BaseManager
 # server configurations
 from queue_global import SERVER_CONFIG
 
-__all__ = ['start_server', 'get_one', 'cancel_wait']
+__all__ = ['start_server', 'get_one', 'cancel_wait', 'shared_queue']
 
 # just set up a null logger
 logger = logging.getLogger(__name__)
@@ -86,7 +89,7 @@ def start_server():
         ServerThread.inst = ServerThread()
 
 def get_one():
-    """Get one object from the queue."""
+    """Get one request from the queue."""
     try:
         request = shared_queue.get()
     except:
